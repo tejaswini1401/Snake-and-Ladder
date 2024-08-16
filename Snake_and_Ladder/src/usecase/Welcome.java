@@ -79,8 +79,11 @@ public class Welcome {
                         break;
 
                     case 2:  // Snake
-                        if (position - roll >= 0) {
-                            position -= roll;
+                        position -= roll;
+                        if (position < 0) {
+                            System.out.println("You moved below 0. Restarting from position 0.");
+                            position = 0;
+                        } else {
                             System.out.println("Snake! You move back to position " + position);
 
                             // Check if the new position is a ladder or snake
@@ -91,8 +94,6 @@ public class Welcome {
                                 position = snakes.get(position);
                                 System.out.println("Oh no! You landed on a snake. Move down to position " + position);
                             }
-                        } else {
-                            System.out.println("You can't move back below 0. Stay at position " + position);
                         }
                         break;
                 }

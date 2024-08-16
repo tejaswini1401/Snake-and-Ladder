@@ -52,19 +52,49 @@ public class Welcome {
                 int roll = random.nextInt(6) + 1;  // Roll a die (1 to 6)
                 System.out.println("You rolled a " + roll);
 
-                if (position + roll <= 100) {
-                    position += roll;
-                    System.out.println("You moved to position " + position);
+                // Randomly determine if it's a No Play, Ladder, or Snake
+                int option = random.nextInt(3);  // 0: No Play, 1: Ladder, 2: Snake
 
-                    if (snakes.containsKey(position)) {
-                        position = snakes.get(position);
-                        System.out.println("Oh no! You landed on a snake. Move down to position " + position);
-                    } else if (ladders.containsKey(position)) {
-                        position = ladders.get(position);
-                        System.out.println("Great! You landed on a ladder. Move up to position " + position);
-                    }
-                } else {
-                    System.out.println("Roll too high to move. Stay at position " + position);
+                switch (option) {
+                    case 0:  // No Play
+                        System.out.println("No Play. You stay at position " + position);
+                        break;
+
+                    case 1:  // Ladder
+                        if (position + roll <= 100) {
+                            position += roll;
+                            System.out.println("Ladder! You move ahead to position " + position);
+
+                            // Check if the new position is a ladder or snake
+                            if (ladders.containsKey(position)) {
+                                position = ladders.get(position);
+                                System.out.println("Great! You landed on a ladder. Move up to position " + position);
+                            } else if (snakes.containsKey(position)) {
+                                position = snakes.get(position);
+                                System.out.println("Oh no! You landed on a snake. Move down to position " + position);
+                            }
+                        } else {
+                            System.out.println("Roll too high to move. Stay at position " + position);
+                        }
+                        break;
+
+                    case 2:  // Snake
+                        if (position - roll >= 0) {
+                            position -= roll;
+                            System.out.println("Snake! You move back to position " + position);
+
+                            // Check if the new position is a ladder or snake
+                            if (ladders.containsKey(position)) {
+                                position = ladders.get(position);
+                                System.out.println("Great! You landed on a ladder. Move up to position " + position);
+                            } else if (snakes.containsKey(position)) {
+                                position = snakes.get(position);
+                                System.out.println("Oh no! You landed on a snake. Move down to position " + position);
+                            }
+                        } else {
+                            System.out.println("You can't move back below 0. Stay at position " + position);
+                        }
+                        break;
                 }
 
                 if (position == 100) {

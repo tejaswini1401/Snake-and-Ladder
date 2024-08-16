@@ -1,57 +1,57 @@
 package com.usecase;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Welcome {
-	
-	 	private static final Map<Integer, Integer> snakes = new HashMap<>();
-	 	private static final Map<Integer, Integer> ladders = new HashMap<>();
 
-	    
-	    static {
-	        // Snakes: Key is the head, value is the tail
-	        snakes.put(16, 6);
-	        snakes.put(47, 26);
-	        snakes.put(49, 11);
-	        snakes.put(56, 53);
-	        snakes.put(62, 19);
-	        snakes.put(64, 60);
-	        snakes.put(87, 24);
-	        snakes.put(93, 73);
-	        snakes.put(95, 75);
-	        snakes.put(98, 78);
+    // Snakes and Ladders on the board
+    private static final Map<Integer, Integer> snakes = new HashMap<>();
+    private static final Map<Integer, Integer> ladders = new HashMap<>();
 
-	        // Ladders: Key is the bottom, value is the top
-	        ladders.put(1, 38);
-	        ladders.put(4, 14);
-	        ladders.put(9, 31);
-	        ladders.put(21, 42);
-	        ladders.put(28, 84);
-	        ladders.put(36, 44);
-	        ladders.put(51, 67);
-	        ladders.put(71, 91);
-	        ladders.put(80, 100);
-	    }
+    // Initializing the snakes and ladders positions
+    static {
+        // Snakes: Key is the head, value is the tail
+        snakes.put(16, 6);
+        snakes.put(47, 26);
+        snakes.put(49, 11);
+        snakes.put(56, 53);
+        snakes.put(62, 19);
+        snakes.put(64, 60);
+        snakes.put(87, 24);
+        snakes.put(93, 73);
+        snakes.put(95, 75);
+        snakes.put(98, 78);
 
+        // Ladders: Key is the bottom, value is the top
+        ladders.put(1, 38);
+        ladders.put(4, 14);
+        ladders.put(9, 31);
+        ladders.put(21, 42);
+        ladders.put(28, 84);
+        ladders.put(36, 44);
+        ladders.put(51, 67);
+        ladders.put(71, 91);
+        ladders.put(80, 100);
+    }
 
-	public static void main(String[] args) {
-		
-		 Scanner scanner = new Scanner(System.in);
-	     Random random = new Random();
-	     int position = 0;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int position = 0;
 
-		System.out.println("Welcome to snake and ladder game");
-		
-		while (position < 100) {
+        System.out.println("Welcome to Snake and Ladder Game!");
+
+        while (position < 100) {
             System.out.println("Press 'r' to roll the die.");
             String input = scanner.nextLine();
 
             if (input.equals("r")) {
                 int roll = random.nextInt(6) + 1;  // Roll a die (1 to 6)
                 System.out.println("You rolled a " + roll);
-                
+
                 if (position + roll <= 100) {
                     position += roll;
                     System.out.println("You moved to position " + position);
@@ -77,6 +77,5 @@ public class Welcome {
         }
 
         scanner.close();
-	}
-
+    }
 }

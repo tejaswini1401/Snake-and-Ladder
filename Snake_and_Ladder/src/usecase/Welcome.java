@@ -98,6 +98,7 @@ public class Welcome {
                         break;
                 }
 
+                // Check if the player has won
                 if (position == 100) {
                     System.out.println("Congratulations! You reached position 100 and won the game!");
                     break;
